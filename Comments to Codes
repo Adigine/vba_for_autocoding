@@ -1,0 +1,49 @@
+' Changing formatting and adding text to word comments for autocoding in MaxQDA
+
+Sub Youth()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*youth capacity*" Then
+             c.Scope = c.Scope & "1]"
+        End If
+    Next c
+End Sub
+
+Sub Community()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*community resilience*" Then
+             c.Scope = c.Scope & "2]"
+        End If
+    Next c
+End Sub
+
+Sub Project()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*project design*" Then
+             c.Scope = c.Scope & "3]"
+        End If
+    Next c
+End Sub
+
+Sub Sustainability()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*sustainability*" Then
+             c.Scope = c.Scope & "4]"
+        End If
+    Next c
+End Sub
+
+' Original code that I worked with; was designed to delete text that had
+' been marked for deletino in a comment
+Sub DeleteCommentsBaseText()
+Dim c As Comment
+For Each c In ActiveDocument.Comments
+    If LCase(Trim(c.Range.Text)) Like "*delete this*" Then
+        c.Scope.Delete
+        c.DeleteRecursively
+    End If
+Next c
+End Sub

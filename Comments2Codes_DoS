@@ -1,0 +1,235 @@
+Sub RunAll()
+    Call CVE
+    Call Trust
+    Call Corruption
+    Call Training
+    Call Gender
+    Call Youth
+    Call Ethnicity
+    Call Borders
+    Call Sustainability
+    Call Lessons
+End Sub
+
+Sub CVE()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*cve*" Then
+             c.Scope = c.Scope & " [1] "
+        End If
+    Next c
+End Sub
+
+Sub Trust()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*trust*" Then
+            c.Scope = c.Scope & " [2] "
+        End If
+    Next c
+End Sub
+
+Sub Corruption()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*petty corruption*" Then
+            c.Scope = c.Scope & " [3] "
+        End If
+    Next c
+End Sub
+
+Sub Training()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*mainstream behavior*" Then
+            c.Scope = c.Scope & " [4] "
+        End If
+    Next c
+End Sub
+
+Sub Gender()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*gender*" Then
+            c.Scope = c.Scope & " [5] "
+        End If
+    Next c
+End Sub
+
+Sub Youth()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*youth*" Then
+            c.Scope = c.Scope & " [6] "
+        End If
+    Next c
+End Sub
+
+Sub Ethnicity()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*ethnicity*" Then
+            c.Scope = c.Scope & " [7] "
+        End If
+    Next c
+End Sub
+
+Sub Borders()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*border issues*" Then
+            c.Scope = c.Scope & " [8] "
+        End If
+    Next c
+End Sub
+
+Sub Sustainability()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*sustainability*" Then
+            c.Scope = c.Scope & " [9] "
+        End If
+    Next c
+End Sub
+
+Sub Lessons()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*lessons learned*" Then
+            c.Scope = c.Scope & " [10] "
+        End If
+    Next c
+End Sub
+
+
+
+'
+' Sub comment2code()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*4*" Then
+'             c.Scope = c.Scope & " [1] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*1*" Then
+'             c.Scope = c.Scope & " [2] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*2*" Then
+'             c.Scope = c.Scope & " [3] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*3*" Then
+'             c.Scope = c.Scope & " [4] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*6*" Then
+'             c.Scope = c.Scope & " [5] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*7*" Then
+'             c.Scope = c.Scope & " [6] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*5*" Then
+'             c.Scope = c.Scope & " [7] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*8*" Then
+'             c.Scope = c.Scope & " [8] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*9*" Then
+'             c.Scope = c.Scope & " [9] "
+'         ElseIf LCase(Trim(c.Range.Text)) Like "*10*" Then
+'             c.Scope = c.Scope & " [10] "
+'         End If
+'     Next c
+' End Sub
+'
+'
+' Sub CVE()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*4*" Then
+'              c.Scope = c.Scope & " [1] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Trust()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*1.*" Then
+'             c.Scope = c.Scope & " [2] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Corruption()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*2*" Then
+'             c.Scope = c.Scope & " [3] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Training()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*3*" Then
+'             c.Scope = c.Scope & " [4] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Gender()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*6*" Then
+'             c.Scope = c.Scope & " [5] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Youth()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*7*" Then
+'             c.Scope = c.Scope & " [6] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Ethnicity()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*5*" Then
+'             c.Scope = c.Scope & " [7] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Borders()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*8*" Then
+'             c.Scope = c.Scope & " [8] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Sustainability()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*9*" Then
+'             c.Scope = c.Scope & " [9] "
+'         End If
+'     Next c
+' End Sub
+'
+' Sub Lessons()
+'     Dim c As Comment
+'     For Each c In ActiveDocument.Comments
+'         If LCase(Trim(c.Range.Text)) Like "*10*" Then
+'             c.Scope = c.Scope & " [10] "
+'         End If
+'     Next c
+' End Sub
+
+' [1] Youth - Adaptation to Local Context
+' [2]Codes (2379-2595)
+' Gender - Adaptation to Local Context
+' [3]Codes (3857-3972)
+' Gender - Adaptation to Local Context
+' [4]Codes (12996-13467)
+' Ethnicity - Adaptation to Local Context
+' [5]Codes (13682-14121)
+' Trust
+' [6]Codes (14695-15438)
+' Gender - Adaptation to Local Context

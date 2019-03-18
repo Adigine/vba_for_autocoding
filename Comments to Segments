@@ -1,0 +1,146 @@
+'copy highligted text to new doc'
+Sub CopyHighlightsToOtherDoc()
+  Dim ThisDoc As Document
+  Dim ThatDoc As Document
+  Dim r As Range
+  Set ThisDoc = ActiveDocument
+  Set r = ThisDoc.Range
+  Set ThatDoc = Documents.Add
+
+  With r.Find
+    .Text = ""
+    .Highlight = True
+    Do While .Execute(Forward:=True) = True
+    'adding %% to demarcate where coded segments begin'
+    ThatDoc.Range.InsertAfter r.Text & vbCrLf & "%%"
+    r.Collapse 0
+    Loop
+  End With
+End Sub
+
+'remove all highlighting in doc'
+Sub RemoveAllHighlights()
+  Selection.HomeKey unit:=wdStory
+  With Selection.Find
+    .ClearFormatting
+    .Highlight = True
+    Do While (.Execute(Forward:=True) = True) = True
+      If Selection.Range.HighlightColorIndex <> wdAuto Then
+         Selection.Range.HighlightColorIndex = wdAuto
+         Selection.Collapse direction:=wdCollapseEnd
+      End If
+    Loop
+  End With
+End Sub
+
+
+'Highligt text for particular code'
+Sub CVE()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*cve*" Then
+             c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Trust()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*trust*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Corruption()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*petty corruption*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Training()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*mainstream behavior*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Gender()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*gender*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Youth()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*youth*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Ethnicity()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*ethnicity*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Borders()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*border issues*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Sustainability()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*sustainability*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub
+
+Sub Lessons()
+    Call RemoveAllHighlights
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*lessons learned*" Then
+        c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+    Call CopyHighlightsToOtherDoc
+End Sub

@@ -1,0 +1,35 @@
+' https://wordribbon.tips.net/T013552_Finding_Text_Using_a_Specific_Highlighting_Color.html
+
+Sub FindNextYellow()
+    With Selection.Find
+        .ClearFormatting
+        .Replacement.ClearFormatting
+        .Text = ""
+        .MatchWildcards = False
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Highlight = True
+        Do
+            .Execute
+        Loop Until Selection.Range.HighlightColorIndex = wdRed _
+          Or Not .Found
+        Selection.Range = Selection.Range & "[1]"
+    End With
+End Sub
+
+
+' Alternate
+
+Sub Highlight()
+  Dim r As Range
+  Set r = ActiveDocument.Range
+
+  With r.Find
+    .Highlight = True
+    Do While .Execute(FindText:="", Forward:=True) = True
+      If r.HighlightColorIndex = wdRed Then
+      Selection.Range = Selection.Range & "[1]"
+    End If
+    Loop
+  End With
+End Sub

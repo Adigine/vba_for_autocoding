@@ -1,0 +1,33 @@
+Sub Spacing()
+
+    'Remove all space
+    With Selection.Find
+     .ClearFormatting
+     .Text = "^p"
+     .Replacement.ClearFormatting
+     .Replacement.Text = ""
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+    'Change %% to paragraph breaks
+    With Selection.Find
+     .ClearFormatting
+     .Text = "%%"
+     .Replacement.ClearFormatting
+     .Replacement.Text = "^p"
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+    'Remove any double-spacing
+    With Selection.Find
+     .ClearFormatting
+     .Text = "^p^p"
+     .Replacement.ClearFormatting
+     .Replacement.Text = "^p"
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+End Sub
