@@ -1,0 +1,89 @@
+'Creates a series of documents with the desired segments by calling other subs,
+'but with messy spacing and using the && symbol to inciate code breaks'
+Sub highlight_doc_loop()
+ Dim docOpen As Document
+
+ For Each docOpen In Documents
+    docOpen.Activate
+    Call CVE
+    Call CopyHighlightsToOtherDoc
+
+ Next docOpen
+End Sub
+
+'cleans up the spacing of the created docs by calling other sub;
+'requires that original docs be closed to cycle only through newly-created docs
+Sub spacing_doc_loop()
+ Dim docOpen As Document
+
+ For Each docOpen In Documents
+    docOpen.Activate
+    Call Spacing
+ Next docOpen
+End Sub
+
+'copy highligted text to new doc'
+Sub CopyHighlightsToOtherDoc()
+  Dim ThisDoc As Document
+  Dim ThatDoc As Document
+  Dim r As Range
+  Set ThisDoc = ActiveDocument
+  Set r = ThisDoc.Range
+  'Set ThatDoc = Documents.Add
+  Set ThatDoc = 
+
+  With r.Find
+    .Text = ""
+    .Highlight = True
+    Do While .Execute(Forward:=True) = True
+    'adding %% to demarcate where coded segments begin'
+    ThatDoc.Range.InsertAfter r.Text & vbCrLf & "&&"
+    r.Collapse 0
+    Loop
+  End With
+End Sub
+
+'highlights text segments based on code, but requires codes be entered each time'
+Sub CVE()
+    Dim c As Comment
+    For Each c In ActiveDocument.Comments
+        If LCase(Trim(c.Range.Text)) Like "*cve*" Then
+             c.Scope.HighlightColorIndex = wdYellow
+        End If
+    Next c
+End Sub
+
+'cleans up the spacing of the created docs;
+Sub Spacing()
+
+    'Remove all space
+    With Selection.Find
+     .ClearFormatting
+     .Text = "^p"
+     .Replacement.ClearFormatting
+     .Replacement.Text = ""
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+    'Change %% to paragraph breaks
+    With Selection.Find
+     .ClearFormatting
+     .Text = "&&"
+     .Replacement.ClearFormatting
+     .Replacement.Text = "^p"
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+    'Remove any double-spacing
+    With Selection.Find
+     .ClearFormatting
+     .Text = "^p^p"
+     .Replacement.ClearFormatting
+     .Replacement.Text = "^p"
+     .Execute Replace:=wdReplaceAll, Forward:=True, _
+     Wrap:=wdFindContinue
+    End With
+
+End Sub

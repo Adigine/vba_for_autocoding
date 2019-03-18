@@ -1,3 +1,16 @@
+Sub RunAll()
+    Call CVE
+    Call Trust
+    Call Corruption
+    Call Training
+    Call Gender
+    Call Youth
+    Call Ethnicity
+    Call Borders
+    Call Sustainability
+    Call Lessons
+End Sub
+
 'copy highligted text to new doc'
 Sub CopyHighlightsToOtherDoc()
   Dim ThisDoc As Document
@@ -20,17 +33,8 @@ End Sub
 
 'remove all highlighting in doc'
 Sub RemoveAllHighlights()
-  Selection.HomeKey unit:=wdStory
-  With Selection.Find
-    .ClearFormatting
-    .Highlight = True
-    Do While (.Execute(Forward:=True) = True) = True
-      If Selection.Range.HighlightColorIndex <> wdAuto Then
-         Selection.Range.HighlightColorIndex = wdAuto
-         Selection.Collapse direction:=wdCollapseEnd
-      End If
-    Loop
-  End With
+  ActiveDocument.Range.Select
+  Selection.Range.HighlightColorIndex = wdNoHighlight
 End Sub
 
 
